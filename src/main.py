@@ -7,13 +7,13 @@ def run_main():
     fonctions.arg_add_arguments(parser)
 
     args = parser.parse_args()
-    fichier_siret = args.fichier
+    fichier_siret = args.data_src / "liste_sirets.txt"
 
     logger = fonctions.logging_params()
 
     liste_sirets = fonctions.open_file(fichier_siret)
 
-    logger.info(f"Votre fichier contient {len(liste_sirets)} numéros de SIRET valides.")
+    logger.info(f"Le fichier contient {len(liste_sirets)} numéros de SIRET valides.")
 
     content_var, cookies_var = fonctions.get_content(logger)
     fonctions.data['javax.faces.ViewState'] = fonctions.get_balise(content_var)
@@ -25,10 +25,10 @@ def run_main():
 
     logger.info(dict_phones)
 
-    fonctions.to_csv(dict_phones, logger=logger)
+    fonctions.to_csv(dict_phones=dict_phones, chemin=args.data_dir / "liste_sirets.csv", logger=logger)
 
     if args.excel:
-        fonctions.to_xlsx(dict_phones, logger=logger)
+        fonctions.to_xlsx(dict_phones, chemin=args.data_dir / "liste_sirets.xlsx", logger=logger)
 
 if __name__ == "__main__":
     run_main()
