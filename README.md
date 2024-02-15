@@ -110,8 +110,7 @@ pip install -r requirements.txt
 Lancer le script à l'aide de votre shell (bash sur Linux dans mon cas). Si vous utilisez MacOS, ce sera probablement le shell zsh. Si vous utilisez Windows (😷), ce sera plutôt PowerShell.
 
 ```bash
-python3 main.py --data_src /home/la_gruge/liste_sirets.txt --data_dir 
-/home/la_gruge/dossier_sirets/numeros_trouves --excel
+python3 main.py --data_src /home/la_gruge/liste_sirets.txt --data_dir /home/la_gruge/dossier_sirets/numeros_trouves --excel
 ```
 
 
