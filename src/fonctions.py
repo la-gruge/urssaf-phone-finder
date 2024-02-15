@@ -103,7 +103,7 @@ def open_file(fichier_siret) -> list:
 
             if (len(line.strip()) == 0):
                 continue
-            temp = re.sub('[\s+]', '', line)
+            temp = re.sub(r'[\s+]', '', line)
             apply_regex(sirets, temp)
     
     return sirets
