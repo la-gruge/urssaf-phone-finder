@@ -130,7 +130,7 @@ Le script actuel est assez rudimentaire. C'est plus un POC réalisé pour le fun
 
 * Permettre d'extraire les numéros de SIRET directement depuis une feuille de calcul d'un classeur .xls, .xlsx (Microsoft Excel) ou encore .ods (Libre Office Calc)
 
-* Permettre en entrée plusieurs fichiers contenant des liste de numéros SIRET.
+* Permettre en entrée plusieurs fichiers contenant des listes de numéros SIRET.
 
 * Récupération, en plus des numéros de téléphones, des autres informations disponibles (code NAF/APE, nom/raison sociale, adresse) dans les réponses HTTPS des serveurs de l'URSSAF. Contrairement aux numéros de téléphones, ces informations sont disponibles dans la base sirène.
 
