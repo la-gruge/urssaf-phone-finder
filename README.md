@@ -103,7 +103,10 @@ Copiez-y les numéros de SIRET. Chaque ligne ne doit comporter qu'un seul numér
 
 ![fichier texte SIRET](/img/liste_texte.png "SIRET fichier texte")
 
-
+Créez un nouvel environnement et installez les dépendances à l'aide de :
+```bash
+pip install -r requirements.txt
+```
 Lancer le script à l'aide de votre shell (bash sur Linux dans mon cas). Si vous utilisez MacOS, ce sera probablement le shell zsh. Si vous utilisez Windows (😷), ce sera plutôt PowerShell.
 
 ```bash
@@ -115,7 +118,7 @@ python3 main.py --data_src /home/la_gruge/liste_sirets.txt --data_dir
 * __main.py__ est le fichier d'entrée du script.
 * __--data_src__ permet de renseigner le chemin du fichier contenant la liste de SIRET à tester. Ici, mon fichier se nomme "liste_siret.txt".
 * __--data_dir__ permet de renseigner le chemin de destination du fichier .csv contenant les numéros de téléphones découverts. Je souhaite que mon fichier se nomme "numeros_trouves". Ne précisez pas l'extension ("numeros_trouves.csv" sera invalide), le script se cargera de la renseigner.
-* __--excel__ est un drapeau. S'il est présent, alors les données seront aussi exportéée au format .xlsx. S'il n'est pas présent, seul le fichier .csv sera créé.
+* __--excel__ est un drapeau. S'il est présent, alors les données seront aussi exportéés au format .xlsx. S'il n'est pas présent, seul le fichier .csv sera créé.
 
 ![Script ligne de commande](/img/script_cli.png "Script Bash")
 

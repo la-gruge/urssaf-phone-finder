@@ -75,8 +75,6 @@ def logging_params() -> logging.Logger:
 
 def arg_add_arguments(parser: argparse.ArgumentParser) -> None:
     '''Ajoute les arguments au parser du module built-in Argparse'''
-
-
     parser.add_argument(
                     "--data_src",
                     type=Path,
