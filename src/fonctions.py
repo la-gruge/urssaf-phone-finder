@@ -1,7 +1,6 @@
 import argparse
 import csv
 import logging
-from pathlib import Path
 import platform
 import random
 import re
@@ -9,6 +8,7 @@ import re
 import httpx
 import xlsxwriter
 
+from pathlib import Path
 from parsel import Selector
 from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_fixed, wait_random, RetryCallState
 from user_agents_os import liste_user_agents_os
@@ -76,24 +76,25 @@ def logging_params() -> logging.Logger:
 def arg_add_arguments(parser: argparse.ArgumentParser) -> None:
     '''Ajoute les arguments au parser du module built-in Argparse'''
 
-    parser.add_argument(
-                    "--excel",
-                    action="store_true",
-                    help="Permet d'exporter les données au format XLSX",
-                    )
 
     parser.add_argument(
                     "--data_src",
                     type=Path,
-                    default=Path(__file__).resolve().parent.parent / "data",
+                    default=Path(__file__).resolve().parent.parent / "data" / "liste_sirets.txt",
                     help="Chemin du fichier source contenant la liste des numéros de SIRET à tester.",
                     )
 
     parser.add_argument(
                     "--data_dir",
                     type=Path,
-                    default=Path(__file__).resolve().parent.parent / "data",
+                    default=Path(__file__).resolve().parent.parent / "data" / "liste_sirets",
                     help="Chemin du fichier de sortie qui contiendra les numéros de SIRET enrichis des numéros de téléphone.",
+                    )
+
+    parser.add_argument(
+                    "--excel",
+                    action="store_true",
+                    help="Permet d'exporter les données au format XLSX",
                     )
 
 def open_file(fichier_siret) -> list:
@@ -185,7 +186,7 @@ def get_num(liste_sirets: list,
     
 def to_csv(dict_phones: dict, chemin: Path, logger: logging.Logger) -> None:
     '''Convertit le dictionnaire en un fichier CSV'''
-    with open(chemin, 'w', newline='') as csv_file:  
+    with open(chemin.with_suffix('.csv'), 'w', newline='') as csv_file:  
         writer = csv.writer(csv_file)
         writer.writerow(["SIRET", "Numero_de_tel"])
         for key, value in dict_phones.items():
@@ -195,7 +196,7 @@ def to_csv(dict_phones: dict, chemin: Path, logger: logging.Logger) -> None:
 
 def to_xlsx(dict_phones: dict, chemin: Path, logger: logging.Logger) -> None:
     '''Convertit le dictionnaire (qui contient les SIRET et les numéros correspondants) en un fichier au format XLSX'''
-    workbook = xlsxwriter.Workbook(chemin, {'strings_to_numbers': False})
+    workbook = xlsxwriter.Workbook(chemin.with_suffix('.xlsx'), {'strings_to_numbers': False})
     worksheet = workbook.add_worksheet()
 
     worksheet.write(0, 0, "SIRET")

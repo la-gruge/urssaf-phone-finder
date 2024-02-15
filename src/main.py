@@ -7,7 +7,7 @@ def run_main():
     fonctions.arg_add_arguments(parser)
 
     args = parser.parse_args()
-    fichier_siret = args.data_src / "liste_sirets.txt"
+    fichier_siret = args.data_src
 
     logger = fonctions.logging_params()
 
@@ -23,12 +23,12 @@ def run_main():
 
     dict_phones = fonctions.get_num(liste_sirets, logger=logger)
 
-    logger.info(dict_phones)
+    logger.debug(dict_phones)
 
-    fonctions.to_csv(dict_phones=dict_phones, chemin=args.data_dir / "liste_sirets.csv", logger=logger)
+    fonctions.to_csv(dict_phones=dict_phones, chemin=args.data_dir, logger=logger)
 
     if args.excel:
-        fonctions.to_xlsx(dict_phones, chemin=args.data_dir / "liste_sirets.xlsx", logger=logger)
+        fonctions.to_xlsx(dict_phones, chemin=args.data_dir, logger=logger)
 
 if __name__ == "__main__":
     run_main()

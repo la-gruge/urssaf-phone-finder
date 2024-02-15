@@ -78,10 +78,12 @@ Pour tester 1,000 numéros SIRET, il faudra compter environ 1min 30sec, soit plu
 Premièrement, il vous faut une liste de SIRET dont vous aimeriez récupérer les numéros de téléphones. Vous pouvez **facilement et gratuitement** vous créer une telle liste de SIRET en utilisant [la base publique officielle de données d'entreprise Sirène](https://www.sirene.fr/sirene/public/creation-fichier).
 
 
-Triez les entreprises selon les critères de votre choix, par exemple le nombre de salariés, la localisation (par département, code postal etc), le/les domaines de leurs activités ou encore leur date de création.
+Sur le site Sirène, triez les entreprises selon les critères de votre choix, par exemple le nombre de salariés, la localisation (par département, code postal etc), le/les domaines de leurs activités ou encore leur date de création etc.
 
 
 Une fois le fichier CSV téléchargé, repérez la colonne SIRET. ⚠️ **A NE PAS CONFONDRE AVEC LA COLONNE SIREN** ⚠️
+
+![SIRET sur Excel](/img/liste_excel.png "SIRET sur excel")
 
 
 Sélectionnez les numéros de SIRET, puis copiez-les (Crtl+C).
@@ -99,6 +101,23 @@ Copiez-y les numéros de SIRET. Chaque ligne ne doit comporter qu'un seul numér
 
 * ma_liste_de_sirets_BORDEAUX.txt
 
+![fichier texte SIRET](/img/liste_texte.png "SIRET fichier texte")
+
+
+Lancer le script à l'aide de votre shell (bash sur Linux dans mon cas). Si vous utilisez MacOS, ce sera probablement le shell zsh. Si vous utilisez Windows (😷), ce sera plutôt PowerShell.
+
+```bash
+python3 main.py --data_src /home/la_gruge/liste_sirets.txt --data_dir 
+/home/la_gruge/dossier_sirets/numeros_trouves --excel
+```
+
+
+* __main.py__ est le fichier d'entrée du script.
+* __--data_src__ permet de renseigner le chemin du fichier contenant la liste de SIRET à tester. Ici, mon fichier se nomme "liste_siret.txt".
+* __--data_dir__ permet de renseigner le chemin de destination du fichier .csv contenant les numéros de téléphones découverts. Je souhaite que mon fichier se nomme "numeros_trouves". Ne précisez pas l'extension ("numeros_trouves.csv" sera invalide), le script se cargera de la renseigner.
+* __--excel__ est un drapeau. S'il est présent, alors les données seront aussi exportéée au format .xlsx. S'il n'est pas présent, seul le fichier .csv sera créé.
+
+![Script ligne de commande](/img/script_cli.png "Script Bash")
 
 ## Améliorations possibles
 
@@ -107,6 +126,8 @@ Le script actuel est assez rudimentaire. C'est plus un POC réalisé pour le fun
 
 
 * Permettre d'extraire les numéros de SIRET directement depuis une feuille de calcul d'un classeur .xls, .xlsx (Microsoft Excel) ou encore .ods (Libre Office Calc)
+
+* Permettre en entrée plusieurs fichiers contenant des liste de numéros SIRET.
 
 * Récupération, en plus des numéros de téléphones, des autres informations disponibles (code NAF/APE, nom/raison sociale, adresse) dans les réponses HTTPS des serveurs de l'URSSAF. Contrairement aux numéros de téléphones, ces informations sont disponibles dans la base sirène.
 
